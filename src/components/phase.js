@@ -21,15 +21,15 @@ const Phase = () => {
  </div>
     
 
-      <div className=" border w-100 border-info h-100"  >
+      <div className=" d-flex row border w-100 border-info "  >
 
        <div className=" text-center font-weight-bold"> 
        <section className="d-flex flex-row btn-group m-1 justify-content-end navbar-nav">
        <div className ="">
-         
+            <Link to="/logic">
             <button type="button"  className="border  btn m-1  border-info" style={{backgroundColor: "#b7e778"}}>Logic </button>
-       
-          
+            </Link>
+
             <button type="button"  className="border  btn  border-info" style={{backgroundColor: "#b7e778"}} >Graph</button>
        
             <Link to="/description">
@@ -53,7 +53,7 @@ const Phase = () => {
           </section>
       </div>
 
-       <div className="d-flex h-100" >
+       <div className="d-flex" >
 
     
         <div className="border  border-info" > 

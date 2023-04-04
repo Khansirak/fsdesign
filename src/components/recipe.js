@@ -8,7 +8,7 @@ const Recipe = () => {
     return(
        <>
         <li>
-        <details >
+        <details open>
           <summary className="pb-2"><input id="message2" type="text" className="border border-success" defaultValue="Recipe"  /> 
           <Link to="/phase">Recipe-name</Link>
            

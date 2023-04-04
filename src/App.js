@@ -9,6 +9,8 @@ import Description from './components/description';
 import Parameter from './components/parameter';
 import Signals from './components/signals';
 import Alarmprompt from './components/alarmprompt';
+import Logic from './components/logic';
+import Library from './components/library';
 
 const App = () => (
   <>
@@ -23,6 +25,8 @@ const App = () => (
       <Route exact path="/parameter" element={<Parameter />} />
       <Route exact path="/signals" element={<Signals />} />
       <Route exact path="/alarmprompt" element={<Alarmprompt />} />
+      <Route exact path="/logic" element={<Logic />} />
+      <Route exact path="/library" element={<Library />} />
     </Routes>
 
     
