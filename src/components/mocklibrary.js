@@ -13,12 +13,25 @@ export const mockData = [
       },
       {
         
+        src:'Puls_Counter.png',
+      },
+      {
+        
+        src:'Multiply.png',
+      },
+      {
+        
+        src:'Nand.png',
+      },
+      {
+        
         src:'LT.png',
       },
     {
         
         src:'Division.png',
       },
+      
       {
         
         src:'GT.png',
@@ -33,8 +46,16 @@ export const mockData = [
       },
       {
         
+        src:'Substraktion.png',
+      },
+      {
+        
         src:'OR_1.png',
       },
+                  {
+        
+        src:'Timer.png',
+      }, 
       {
         
         src:'OR_2.png',
@@ -42,6 +63,10 @@ export const mockData = [
       {
         
         src:'OR_3.png',
+      },
+      {
+        
+        src:'NOR.png',
       },
       {
         
@@ -90,10 +115,7 @@ export const mockData = [
         
         src:'CTD.png',
       },
-      {
-        
-        src:'Division.png',
-      },
+
       {
         
         src:'Factorial.png',
@@ -126,27 +148,13 @@ export const mockData = [
         
         src:'MOD.png',
       },
-      {
-        
-        src:'Multiply.png',
-      },
-      {
-        
-        src:'Nand.png',
-      },
 
       {
         
         src:'NEG.png',
       },
-      {
-        
-        src:'NOR.png',
-      },
-      {
-        
-        src:'Puls_Counter.png',
-      },
+
+
       {
         
         src:'Rising_Puls.png',
@@ -189,20 +197,13 @@ export const mockData = [
       },
       {
         
-        src:'Substraktion.png',
-      },
-      {
-        
         src:'TAN.png',
       },
       {
         
         src:'TANH.png',
       },
-            {
-        
-        src:'Timer.png',
-      },      {
+     {
         
         src:'TOF.png',
       },

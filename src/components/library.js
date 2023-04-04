@@ -7,6 +7,8 @@ import { mockData } from './mocklibrary';
 
 const Library = () => {
 
+  const [name, setName] = React.useState("AND_1.png");
+
     return(
        <>
        
@@ -78,15 +80,16 @@ const Library = () => {
           </li>
           </ul>
             </div>
-            <div class="d-flex align-content-center flex-wrap">
+
+            <div className="d-flex forscroll border w-100  align-content-center flex-wrap border-dark " >
             { mockData.map((data) => (
               
-              <button className="logic-btn"><img className="logic-button" alt={data.src} src={require(`../images/${data.src}`)} /></button>
+              <button className="logic-btn" onClick={(event) => setName(data.src)}><img className="logic-button" alt={data.src} src={require(`../images/${data.src}`)} /></button>
             ))}
 
           </div>
             <div>   
-            <ul className ="nav m-2 d-flex  justify-content-around navbar-nav">
+            <ul className ="nav m-2 d-flex w-100 justify-content-around navbar-nav">
           <li className ="nav-item  ">
             <button type="button"  className="border btn m-3 border-info" style={{backgroundColor: "#b7e778"}} >Add to Logic </button>
           </li>
@@ -94,6 +97,12 @@ const Library = () => {
             <button type="button"  className="border w-75 btn m-3 border-info" style={{backgroundColor: "#b7e778"}} >Add input</button>
           </li>
           </ul></div>
+
+          <div className="border w-25 m-3 mt-0 mb-0 border-info">
+          <img className="logic-button h-50 p-4"  src={require(`../images/${name}`)} />
+
+
+          </div>
              </section>
         </div>
   <div >
