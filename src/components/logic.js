@@ -23,24 +23,22 @@ const Logic = () => {
 
       <div className=" d-flex row border w-100 border-info "  >
 
-       <div className=" text-center font-weight-bold"> 
+     
        <section className="d-flex flex-row btn-group m-1 justify-content-end navbar-nav">
        <div className =" ">
-         
             <button type="button"  className="border  btn m-1  border-info" style={{backgroundColor: "#b7e778"}}>Logic </button>
             
             <button type="button"  className="border m-1 btn border-info" style={{backgroundColor: "#C0C0C0"}} onClick={removeElement}>List-toolbox</button>
-        
   
           </div>
           
           </section>
-      </div>
+   
 
-       <div className="d-flex" >
+       <div className="d-flex h-100" >
 
     
-        <div className="border  border-info" > 
+        <div className="border h-100 border-info" > 
         jii       
         <div className=" row" >
         <nav className ="navbar ">
@@ -62,10 +60,11 @@ const Logic = () => {
           <li className ="nav-item w-75">
             <button type="button"  className="border btn m-3 border-info" style={{backgroundColor: "#b7e778"}}>New Graph</button>
           </li>
+          <Link to="/phase">
           <li className ="nav-item pt-5 mt-5 w-75">
             <button type="button"  className="border btn m-3 border-info" style={{backgroundColor: "#b7e778"}}>Back</button>
           </li>
-  
+          </Link>
           </ul>
           </nav>
   
@@ -76,9 +75,27 @@ const Logic = () => {
           <div className="d-flex h-100">
           <div className="border w-100 border-info" >        
          
-          <section className="d-flex p-2 justify-content-between"> 
-            <div>Input</div>
-            <div> Output</div>
+          <section className="d-flex p-4 h-100 justify-content-between"> 
+            <div className="border w-25 ">
+            <h6 className="border-bottom p-2 text-center"> Input </h6>
+    
+        <label>
+         
+          <input type="text" className="w-100"   />
+        </label>
+      
+
+            </div>
+            <div className="border w-100"></div>
+
+            <div className="border  w-25"> 
+            <h6 className="border-bottom p-2 text-center"> Output </h6>
+            <label>
+         
+         <input type="text" className="w-100"   />
+       </label>
+     
+            </div>
              </section>
         </div>
 

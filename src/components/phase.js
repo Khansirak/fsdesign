@@ -2,14 +2,19 @@ import React, { useState } from "react";
 import Project from './project';
 import { Link } from 'react-router-dom';
 import './phase.css';
+import Detail from "../images/detail.png"
 const Phase = () => {
   const [visible, setVisible] = useState(true);
-
+  const [visible1, setVisible1] = useState(true);
+  const [visible2, setVisible2] = useState(false);
   const removeElement = () => {
     setVisible((prev) => !prev);
   };
 
-  
+  const get_detail = () => {
+    setVisible1((prev) => !prev);
+    setVisible2((prev) => !prev);
+  }
     return(
        <>
        
@@ -29,9 +34,9 @@ const Phase = () => {
             <Link to="/logic">
             <button type="button"  className="border  btn m-1  border-info" style={{backgroundColor: "#b7e778"}}>Logic </button>
             </Link>
-
+            <Link to="/graph">
             <button type="button"  className="border  btn  border-info" style={{backgroundColor: "#b7e778"}} >Graph</button>
-       
+            </Link>
             <Link to="/description">
             <button type="button" className="border m-1 btn border-info" style={{backgroundColor: "#b7e778"}}>Descrition</button>
             </Link>
@@ -76,10 +81,11 @@ const Phase = () => {
           <li className ="nav-item w-75">
             <button type="button"  className="border btn m-3 border-info" style={{backgroundColor: "#b7e778"}}>Down</button>
           </li>
+          <Link to="/">
           <li className ="nav-item pt-5 mt-5 w-75">
             <button type="button"  className="border btn m-3 border-info" style={{backgroundColor: "#b7e778"}}>Back</button>
           </li>
-  
+          </Link>
           </ul>
           </nav>
   
@@ -88,27 +94,68 @@ const Phase = () => {
 
         <div className="border w-100 border-info" >        
           <div className="d-flex h-100">
+
           <div className="border w-100 border-info" >        
           <text className=" border-bottom d-flex  justify-content-center p-2 border-info "> Phase-name-Number  Run:O </text>
-          <section className="d-flex p-2 justify-content-between"> 
-            <a> <img alt="detail" className="image"  /> </a>
+          <section className="d-flex p-2 mb-5 justify-content-between"> 
+
+            <button className="p-0 no-border"> <img alt="detail" className="image" src={Detail} style={{width:"100%", height:"100%"}} onClick={get_detail}/> </button>
             <text> Rev-01.00</text>
              </section>
-        </div>
+             <div className="d-flex column justify-content-around"> 
+             <div className="d-flex w-50"> STEP CHAIN</div>
+             {visible2 &&
+             <div className="border  d-flex row justify-content-between border-info m-2 w-50 h-25">
+              <h5 className="border border-info text-center" style={{backgroundColor: "#b7e778"}}> All steps </h5>
+              <table  className="table border border-dark " > 
+              <thead >
+                <tr>
+                <th className="p-0">Scrittname</th>
+                <th className="p-0">Scrittnummer</th>
+                <th className="p-0">Restartadress</th>
+                </tr>
 
-  <div >
+              </thead>
+                <tbody>
+                <tr className="rows" >
+                    <td ><input type="text" defaultValue="Grundstellung" className='w-100 no-border'></input></td>
+                     <td ><input type="text" defaultValue="10" className=' no-border'></input></td>
+                     <td ><input type="text" defaultValue="20" className=' no-border'></input></td>            
+                </tr>
+                <tr className="rows" >
+                    <td ><input type="text" defaultValue="pH-Phufen" className='w-100 no-border'></input></td>
+                     <td ><input type="text" defaultValue="10" className=' no-border'></input></td>
+                     <td ><input type="text" defaultValue="20" className=' no-border'></input></td>            
+                </tr>
+                <tr className="rows" >
+                    <td ><input type="text" defaultValue="pH-Einstellen" className='w-100 no-border'></input></td>
+                     <td ><input type="text" defaultValue="10" className=' no-border'></input></td>
+                     <td ><input type="text" defaultValue="20" className=' no-border'></input></td>            
+                </tr>
+                <tr className="rows" >
+                    <td ><input type="text" defaultValue="Prozess-Freigabe" className='w-100 no-border'></input></td>
+                     <td ><input type="text" defaultValue="10" className=' no-border'></input></td>
+                     <td ><input type="text" defaultValue="20" className=' no-border'></input></td>            
+                </tr>
+               </tbody> 
+              </table>
+            <div className="d-flex justify-content-end">
+            <button type="button"  className="border  btn m-1  border-info" style={{backgroundColor: "#b7e778"}}>Cancel </button>
+            <button type="button"  className="border  btn m-1  border-info" style={{backgroundColor: "#b7e778"}}>Confirm </button>
+            </div>
+             </div>
+              }
+             </div>
+             
+        </div>
+        {visible1 && 
         <div className="border w-100 border-info" >        
         <text className=" border-bottom d-flex  justify-content-center p-2 border-info "> Run:detail </text>
-  {/*       <div>
-        <button className="btn btn-sm btn-danger" >
-                Insert Row
-              </button>
-        </div>
-      */}
-        <table  className="table  m-1  border border-dark" > 
+
+        <table  className="table  m-1 mb-3  border border-dark" > 
     <thead >
   <tr>
-      <th className="p-0">Transition:</th>
+      <th className="p-0">Action:</th>
       <th className="p-0" ></th>
       <th className="p-0" >Step-no:</th>
       <th className="p-0" ></th>
@@ -164,10 +211,11 @@ const Phase = () => {
   </tbody> 
 </table>
         </div>
-        </div>
+       }
           </div>
        
         </div>
+
 
         {visible && 
         <div className="border w-25 border-info">

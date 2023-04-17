@@ -1,5 +1,5 @@
 .logic-btn{
-  width: 110px;
+  width: 15%;
     margin: 1%;
     height: min-content;
 }
@@ -8,8 +8,12 @@
     height: 100%;
 }
 .forscroll{
-  overflow-y: auto;
+  overflow-y: scroll;
 
   max-height: 100vh;
 
+}
+.logic-button-show{
+  width: 100%;
+  
 }
