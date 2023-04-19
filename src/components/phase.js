@@ -99,7 +99,7 @@ const Phase = () => {
           <text className=" border-bottom d-flex  justify-content-center p-2 border-info "> Phase-name-Number  Run:O </text>
           <section className="d-flex p-2 mb-5 justify-content-between"> 
 
-            <button className="p-0 no-border"> <img alt="detail" className="image" src={Detail} style={{width:"100%", height:"100%"}} onClick={get_detail}/> </button>
+            <button className="p-0 no-border" style={{width:"3em", height:"3em"}}> <img alt="detail" className="image" src={Detail} style={{width:"100%", height:"100%"}} onClick={get_detail}/> </button>
             <text> Rev-01.00</text>
              </section>
              <div className="d-flex column justify-content-around"> 

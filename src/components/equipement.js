@@ -64,18 +64,14 @@ const Equipement = () => {
     </tr>
   </thead>
   <tbody>
-
     <tr scope="row">
       <td className='p-0 w-75'>
     <table id= "tb" className="table m-0 border">
     <tbody>
     <tr >
-  
-    
     {column1.map((column1, index) => (<Addcolumn1 key={index} />))} 
-    
-    </tr>
 
+    </tr>
     {row1.map((row1, index) => (<Addrow1 key={index}  param ={column1.length} />))} 
 
 
@@ -86,8 +82,6 @@ const Equipement = () => {
     <table className="table m-0 border">
     <tbody>
     <tr>
-   
-   
     {column2.map((column2, index) => (<Addcolumn1 key={index} />))}
     </tr>
     

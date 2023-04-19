@@ -4,8 +4,6 @@ import Addcolumn1 from './addcolumn1'
 
 const Addrow1 = (props) => {
 
-
-  
   return (
    <>
     <tr >

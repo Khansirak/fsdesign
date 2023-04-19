@@ -7,8 +7,6 @@ const Project = () => {
 
     return(
        <>
-
-
           <ul className="d-flex tree mt-5 p-0 ">
             <li>
               <details open>
