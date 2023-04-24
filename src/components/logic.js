@@ -1,28 +1,87 @@
-import React, { useState,useRef } from "react";
+import React, { useState,useRef, useEffect } from "react";
 import Project from './project';
 import { Link } from 'react-router-dom';
 import './phase.css';
 import Xarrow, {useXarrow, Xwrapper} from 'react-xarrows';
+import './library.css';
 import Draggable from 'react-draggable';
+
+import { mockData } from './mocklibrary';
+
+import Image from "./AND_1.png";
+
+import { useCallback } from 'react';
+import ReactFlow, {
+  MiniMap,
+  Controls,
+  Background,
+  useNodesState,
+  useEdgesState,
+  addEdge,
+  ReactFlowProvider,
+} from 'reactflow';
+
+import 'reactflow/dist/style.css';
+
+
 
 const boxStyle = {border: "grey solid 2px", borderRadius: "10px", width:"100px", height:"100px"};
 
 
 const Logic = () => {
 
+//for the libary
+  const [name, setName] = React.useState("AND_1.png");
+  const [visible1, setVisible1] = useState(true);
+  const [visibles, setVisibles] = useState(false);
+  const [active, setActive] = useState(false);
+  const [active1, setActive1] = useState(false);
+  const removeElement1 = () => {
+    setVisible1(() => true);
+    setVisibles(() => false);
+    setActive(true);
+    setActive1(false);
+  };
+  const removeElements = () => {
+    setVisible1(() => false);
+    setVisibles(() => true);
+    setActive1(true);
+    setActive(false);
+  };
+
+
+////////
+
+const initialNodes = [
+  { id: '1', sourcePosition: 'right', targetPosition: 'left', position: { x: 0, y: 0 }, data: { label: <img src={Image} style={{width:"100px", height:"100px"}}/>} },
+  { id: '2', sourcePosition: 'right', targetPosition: 'left', position: { x: 0, y: 100 }, data: { label: <img src={Image} style={{width:"100px", height:"100px"}}/>} },
+  { id: '3', sourcePosition: 'right', targetPosition: 'left', position: { x: 100, y: 0 }, data: { label: <img src={Image} style={{width:"100px", height:"100px"}}/>} },
+  {
+    id: 'horizontal-1',
+    sourcePosition: 'right',
+    type: 'input',
+    data: { label: 'Input' },
+    position: { x: 0, y: 80 },
+  },
+];
+const initialEdges = [{ id: 'e1-2', source: '1', target: '2',type: 'step', }];
+
+const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
+  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+
+  const onConnect = useCallback((params) => setEdges((eds) => addEdge(params, eds)), [setEdges]);
+
+/////
+
+//for logic
   const [visible, setVisible] = useState(true);
+
+//persist the output field NOT WORKING 
   const [num, setOutput] = useState(1);
+
+  
   const [input, setInput] = useState(0);
-const DraggableBox = ({id}) => {
-    const updateXarrow = useXarrow();
-    return (
-        <Draggable onDrag={updateXarrow} onStop={updateXarrow}>
-            <div id={id} style={boxStyle}>
-            <img  className="logic-button" alt="example" src={require(`./AND_1.png`)} />
-            </div>
-        </Draggable>
-    );
-};
+
 
 
 const DraggableInput = ({id}) => {
@@ -50,6 +109,8 @@ const DraggableOutput = () => {
 const addOutput = (e) => {
 
 setOutput(num+1);
+
+
 }
 const addInput = (e) => {
  
@@ -60,13 +121,23 @@ const addInput = (e) => {
     setVisible((prev) => !prev);
   };
 
-  
+  //logic/libary change display
+  const [show, setShow] = useState(false);
+  const [show1, setShow1] = useState(true);
+  const showElement = () => {
+    setShow((prev) => !prev);
+    setShow1((prev) => !prev);
+  };
     return(
        <>
        
     <div className=" d-flex menu-body w-100 "  >
     <div className=" menu-body2 d-flex flex-row w-100">
+    <div className="fixed-top text-center mt-2" style={{paddingLeft:"50em"}} > 
+      <button type="button"  className="border text-dark m-2 px-5 p-2  btn border-info" style={{backgroundColor: "#b7e778"}} > <h4>Logic</h4> </button>
+      </div> 
  <div className=" m-0" style={{width:"15%"}}>
+
   <div className="align-self-sm-center">Management</div>
  <Project />
  </div>
@@ -79,16 +150,17 @@ const addInput = (e) => {
           </div>
           </section>
        <div className="d-flex h-100" >
-        <div className="border h-100 border-info" > 
+
+        <div className="d-flex border h-100 border-info" > 
         jii       
         <div className=" row" >
         <nav className ="navbar ">
           <ul className ="nav m-2 d-flex  justify-content-around navbar-nav">
-          <Link to="/library">
+          
           <li className ="nav-item w-75 ">
-            <button type="button"  className="border btn m-3 border-info" style={{backgroundColor: "#b7e778"}} >Library </button>
+            <button type="button"  className="border btn m-3 border-info" style={{backgroundColor: "#b7e778"}} onClick={showElement} >Library </button>
           </li>
-          </Link>
+         
           <li className ="nav-item w-75 ">
             <button type="button"  className="border  btn m-3 border-info" style={{backgroundColor: "#b7e778"}} >Connection</button>
           </li>
@@ -111,6 +183,7 @@ const addInput = (e) => {
       </div>
         </div>
 
+{show1 &&
         <div className="border w-100 border-info" >        
           <div className="d-flex h-100">
           <div className="border w-100 border-info" >        
@@ -125,13 +198,22 @@ const addInput = (e) => {
 
             </div>
             <div className="border p-3 w-100">
-            <div style={{display: 'flex', justifyContent: 'space-evenly', width: '100%'}}>
-            <Xwrapper>
-                <DraggableBox id={'elem1'}/>
-                <DraggableBox id={'elem2'}/>
-               
-                <Xarrow start="elem1" end="elem2" lineColor="black" headColor="black" strokeWidth={1} showHead={false} />
-            </Xwrapper>
+            <div style={{display: 'flex', justifyContent: 'space-evenly', width: '100%', height:"100hv"}}>
+            <div className="border " style={{ height: '70vh', width:"700px" }}>
+              <ReactFlow
+                  nodes={nodes}
+                  edges={edges}
+                  onNodesChange={onNodesChange}
+                  onEdgesChange={onEdgesChange}
+                  onConnect={onConnect}
+                  fitView
+                  attributionPosition="bottom-left"
+                 >
+              <MiniMap />
+              <Controls />
+              <Background  />
+              </ReactFlow>
+    </div>
         </div>
             </div>
 
@@ -148,6 +230,68 @@ const addInput = (e) => {
         </div>
           </div>
         </div>
+      }
+
+{show &&
+        <div className="d-flex border w-100 border-info" >        
+          <div className="d-flex h-100">
+          <div className=" d-flex border w-100 border-info" >        
+         
+          <section className="d-flex p-2 justify-content-between"> 
+            <div>
+            <ul className ="nav d-flex  justify-content-around navbar-nav">
+          <li className ="nav-item  ">
+            <button type="button"  className="border btn m-3 border-info" style={{ backgroundColor: active ? "#C0C0C0" : "#b7e778"}} onClick={removeElement1}  >Logic-block </button>
+          </li>
+          <li className ="nav-item ">
+            <button type="button"  className="border  btn m-3 border-info" style={{backgroundColor: active1 ? "#C0C0C0" : "#b7e778"}} onClick={removeElements} >Controller</button>
+          </li>
+          </ul>
+            </div>
+
+            {visible1 && 
+            <div className=" forscroll border w-100   border-dark " >
+              
+            { mockData.map((data) => (
+              
+              <button className="logic-btn" onClick={() => setName(data.src)}><img className="logic-button" alt={data.src} src={require(`../images/${data.src}`)} /></button>
+            ))}
+          </div>
+        }
+        
+        {visibles && 
+            <div className="d-flex forscroll border w-100  align-content-center flex-wrap border-dark " >
+              
+            { mockData.map((data) => (
+              
+              <button className="logic-btn" onClick={() => setName(data.src)}><img className="logic-button" alt={data.src} src={require(`../images/AND_1.png`)} /></button>
+            ))}
+            
+          </div>
+        }
+            <div>   
+            <ul className ="nav m-2 d-flex w-100 justify-content-around navbar-nav">
+          <li className ="nav-item  ">
+            <button type="button"  className="border btn m-3 border-info" style={{backgroundColor: "#b7e778"}} >Add to Logic </button>
+          </li>
+          <li className ="nav-item ">
+            <button type="button"  className="border w-75 btn m-3 border-info" style={{backgroundColor: "#b7e778"}} >Add input</button>
+          </li>
+          </ul></div>
+
+          <div className="border w-25  border-info">
+          <img className="logic-button-show  p-4"  src={require(`../images/${name}`)} />
+       </div>
+             </section>
+        </div>
+  <div >
+        </div>
+          </div>
+       
+        </div>
+
+}
+
 
         {visible && 
         <div className="border w-25 border-info">
@@ -164,10 +308,15 @@ const addInput = (e) => {
 
           </div>
 }
+
+
+
        </div>
       </div>
     </div>
+    
    </div>
+   
         </> 
     );
 

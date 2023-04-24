@@ -3,6 +3,8 @@ import Project from './project';
 import { Link } from 'react-router-dom';
 import './phase.css';
 import Detail from "../images/detail.png"
+
+
 const Phase = () => {
   const [visible, setVisible] = useState(true);
   const [visible1, setVisible1] = useState(true);
@@ -17,17 +19,22 @@ const Phase = () => {
   }
     return(
        <>
-       
+      <div className="fixed-top text-center mt-2" style={{paddingLeft:"50em"}} > 
+      <button type="button"  className="border rounded-circle m-2 p-4  btn border-info" style={{backgroundColor: "#b7e778"}} >Run</button>
+      <button type="button"  className="border rounded-circle m-2 p-4  btn border-info" style={{backgroundColor: "#b7e778"}}>Hold</button>
+      <button type="button"  className="border rounded-circle m-2 p-4 btn border-info" style={{backgroundColor: "#b7e778"}} >Abort</button>
+      <button type="button"  className="border rounded-circle m-2 p-4 btn border-info" style={{backgroundColor: "#b7e778"}} >Stop</button>
+      </div> 
     <div className=" d-flex menu-body w-100 "  >
     <div className=" menu-body2 d-flex flex-row">
  <div className=" w-25 m-0">
   <div className="align-self-sm-center">Management</div>
  <Project />
  </div>
-    
+ 
 
       <div className=" d-flex row border w-100 border-info "  >
-
+      
        <div className=" text-center font-weight-bold"> 
        <section className="d-flex flex-row btn-group m-1 justify-content-end navbar-nav">
        <div className ="">
@@ -215,7 +222,6 @@ const Phase = () => {
           </div>
        
         </div>
-
 
         {visible && 
         <div className="border w-25 border-info">

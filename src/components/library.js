@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Project from './project';
 import { Link } from 'react-router-dom';
 import './library.css';
-
+   //////////////TO BE DELETED /////////////
 import { mockData } from './mocklibrary';
 
 const Library = () => {
@@ -83,6 +83,8 @@ const Library = () => {
           </nav>
       </div>
         </div>
+
+
         <div className="d-flex border w-100 border-info" >        
           <div className="d-flex h-100">
           <div className=" d-flex border w-100 border-info" >        
@@ -139,6 +141,9 @@ const Library = () => {
           </div>
        
         </div>
+
+
+
        </div>
       </div>
     </div>

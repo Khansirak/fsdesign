@@ -2,6 +2,10 @@ import React, { useState } from "react";
 import Project from './project';
 import { Link } from 'react-router-dom';
 import './phase.css';
+
+
+
+
 const Graph = () => {
   const [visible, setVisible] = useState(true);
 
@@ -10,11 +14,17 @@ const Graph = () => {
   };
 
   
+
+
     return(
        <>
        
     <div className=" d-flex menu-body w-100 "  >
     <div className=" menu-body2 d-flex flex-row w-100">
+    <div className="fixed-top text-center mt-2" style={{paddingLeft:"50em"}} > 
+      <button type="button"  className="border text-dark m-2 px-5 p-2  btn border-info" style={{backgroundColor: "#b7e778"}} > <h4>Grahp</h4> </button>
+ 
+      </div> 
  <div className=" w-25 m-0">
   <div className="align-self-sm-center">Management</div>
  <Project />
@@ -45,28 +55,28 @@ const Graph = () => {
           <ul className ="nav p-4 d-flex flex-wrap  ">
         
           <li className ="nav-item w-50 ">
-            <button type="button"  className="border btn m-2 w-75  border-info" style={{backgroundColor: "#b7e778"}} >New coordinate </button>
+            <button type="button"  className="border btn m-1 w-75  border-info" style={{backgroundColor: "#b7e778"}} >New coordinate </button>
           </li>
           <li className ="nav-item w-50 ">
-            <button type="button"  className="border  btn m-2 w-75 border-info" style={{backgroundColor: "#b7e778"}} >Horizontal Line</button>
+            <button type="button"  className="border  btn m-1 w-75  border-info" style={{backgroundColor: "#b7e778"}} >Horizontal Line</button>
           </li>
           <li className ="nav-item w-50">
-            <button type="button" className="border btn m-2 w-75 border-info" style={{backgroundColor: "#b7e778"}}>Auxiliary Line horizontal</button>
+            <button type="button" className="border btn m-1 w-75 border-info" style={{backgroundColor: "#b7e778"}}>Auxiliary Line horizontal</button>
           </li>
           <li className ="nav-item w-50">
-            <button type="button"  className="border btn m-2  w-75 border-info" style={{backgroundColor: "#b7e778"}}>Text</button>
+            <button type="button"  className="border btn m-1  w-75 border-info" style={{backgroundColor: "#b7e778"}}>Text</button>
           </li>
           <li className ="nav-item w-50">
-            <button type="button"  className="border btn m-2  w-75 border-info" style={{backgroundColor: "#b7e778"}}>New Page</button>
+            <button type="button"  className="border btn m-1  w-75 border-info" style={{backgroundColor: "#b7e778"}}>New Page</button>
           </li>
           <li className ="nav-item  w-50">
-            <button type="button"  className="border btn m-2 w-75 border-info" style={{backgroundColor: "#b7e778"}}>Free Hand Line</button>
+            <button type="button"  className="border btn m-1 w-75 border-info" style={{backgroundColor: "#b7e778"}}>Free Hand Line</button>
           </li>
           <li className ="nav-item w-50">
-            <button type="button"  className="border btn m-2 w-75 border-info" style={{backgroundColor: "#b7e778"}}>Auxiliary Line vertical</button>
+            <button type="button"  className="border btn m-1 w-75 border-info" style={{backgroundColor: "#b7e778"}}>Auxiliary Line vertical</button>
           </li>
           <li className ="nav-item  w-50">
-            <button type="button"  className="border btn m-2 w-75 border-info" style={{backgroundColor: "#b7e778"}}>Vertical Line</button>
+            <button type="button"  className="border btn m-1 w-75 border-info" style={{backgroundColor: "#b7e778"}}>Vertical Line</button>
           </li>
           
           </ul>
@@ -83,12 +93,13 @@ const Graph = () => {
       </div>
         </div>
 
-        <div className="border w-100 border-info" >        
+        <div className="border w-100 border-info" >  
+
           <div className="d-flex h-100">
           <div className="border w-100 border-info" >        
           <h3 className="border-bottom text-center border-info"> Graph </h3>
           <section className="d-flex p-4 h-100 justify-content-center"> 
-          
+              
           
              </section>
         </div>
