@@ -8,12 +8,14 @@ import './phase.css';
 
 const Graph = () => {
   const [visible, setVisible] = useState(true);
-
+  const [visibles2, setVisibles2] = useState(true);
   const removeElement = () => {
     setVisible((prev) => !prev);
   };
 
-  
+  const removeElement2 = () => {
+    setVisibles2((prev) => !prev);
+  };
 
 
     return(
@@ -25,37 +27,41 @@ const Graph = () => {
       <button type="button"  className="border text-dark m-2 px-5 p-2  btn border-info" style={{backgroundColor: "#b7e778"}} > <h4>Grahp</h4> </button>
  
       </div> 
- <div className=" w-25 m-0">
-  <div className="align-self-sm-center">Management</div>
- <Project />
- </div>
+
     
 
       <div className=" d-flex row border w-100 border-info "  >
 
      
-       <section className="d-flex flex-row btn-group m-1 justify-content-end navbar-nav">
-       <div className =" ">
+       
+       <div className ="d-flex p-0 justify-content-between ">
+       <div>
+            <button type="button"  className="border text-center m-1 btn border-info" style={{backgroundColor: "#C0C0C0"}} onClick={removeElement2} >Management</button>
+            </div>
+            <div>
             <button type="button"  className="border  btn m-1  border-info" style={{backgroundColor: "#b7e778"}}>Overview </button>
             
             <button type="button"  className="border m-1 btn border-info" style={{backgroundColor: "#C0C0C0"}} onClick={removeElement}>List-toolbox</button>
-  
+            </div>
           </div>
-          
-          </section>
    
 
-       <div className="d-flex h-100" >
-
+       <div className="d-flex p-0 h-100" >
     
-        <div className="border h-100 w-50 border-info" > 
-        jii       
-        <div className="d-flex row justify-content-around" >
+    
+        <div className="d-flex column border h-100 w-50 border-info" > 
+        {visibles2&& 
+        <div className=" border w-50 m-0 border-info">
+  
+          <Project />
+        </div> 
+}    
+        <div className="d-flex w-50 row justify-content-around" >
         <nav className ="d-flex row justify-content-between">
           <ul className ="nav p-4 d-flex flex-wrap  ">
         
           <li className ="nav-item w-50 ">
-            <button type="button"  className="border btn m-1 w-75  border-info" style={{backgroundColor: "#b7e778"}} >New coordinate </button>
+            <button type="button"  className="border btn btn-rounded    border-info" style={{backgroundColor: "#b7e778"}} >New coordinate </button>
           </li>
           <li className ="nav-item w-50 ">
             <button type="button"  className="border  btn m-1 w-75  border-info" style={{backgroundColor: "#b7e778"}} >Horizontal Line</button>

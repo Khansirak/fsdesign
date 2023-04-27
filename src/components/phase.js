@@ -9,6 +9,7 @@ const Phase = () => {
   const [visible, setVisible] = useState(true);
   const [visible1, setVisible1] = useState(true);
   const [visible2, setVisible2] = useState(false);
+  const [visibles2, setVisibles2] = useState(true);
   const removeElement = () => {
     setVisible((prev) => !prev);
   };
@@ -17,6 +18,9 @@ const Phase = () => {
     setVisible1((prev) => !prev);
     setVisible2((prev) => !prev);
   }
+  const removeElement2 = () => {
+    setVisibles2((prev) => !prev);
+  };
     return(
        <>
       <div className="fixed-top text-center mt-2" style={{paddingLeft:"50em"}} > 
@@ -26,18 +30,15 @@ const Phase = () => {
       <button type="button"  className="border rounded-circle m-2 p-4 btn border-info" style={{backgroundColor: "#b7e778"}} >Stop</button>
       </div> 
     <div className=" d-flex menu-body w-100 "  >
-    <div className=" menu-body2 d-flex flex-row">
- <div className=" w-25 m-0">
-  <div className="align-self-sm-center">Management</div>
- <Project />
- </div>
- 
-
-      <div className=" d-flex row border w-100 border-info "  >
-      
-       <div className=" text-center font-weight-bold"> 
-       <section className="d-flex flex-row btn-group m-1 justify-content-end navbar-nav">
-       <div className ="">
+    <div className=" menu-body2 d-flex flex-row w-100">
+<div className="d-flex border border-info p-0 w-100">
+     
+       <div className="d-flex row w-100" >
+       <div className="d-flex  justify-content-between">
+        <div>
+            <button type="button"  className="border text-center m-1 btn border-info" style={{backgroundColor: "#C0C0C0"}} onClick={removeElement2}>Management</button>
+            </div>
+            <div>
             <Link to="/logic">
             <button type="button"  className="border  btn m-1  border-info" style={{backgroundColor: "#b7e778"}}>Logic </button>
             </Link>
@@ -55,42 +56,40 @@ const Phase = () => {
             </Link>
             <Link to="/alarmprompt">
             <button type="button"  className="border m-1 btn border-info" style={{backgroundColor: "#b7e778"}}>Alarm&Prompt</button>
-            </Link>
-            
+            </Link>           
             <button type="button"  className="border m-1 btn border-info" style={{backgroundColor: "#C0C0C0"}} onClick={removeElement}>List-toolbox</button>
-        
-  
+            </div>       
           </div>
-          
-          </section>
-      </div>
+      <div className=" border d-flex p-0 m-0 border-info">
+      {visibles2&& 
 
-       <div className="d-flex" >
-
-    
+<div className=" m-0" style={{width:"20%"}}>
+<Project />
+</div>
+} 
         <div className="border  border-info" > 
         jii       
         <div className=" row" >
         <nav className ="navbar ">
           <ul className ="nav m-2 d-flex  justify-content-around navbar-nav">
           <li className ="nav-item w-75 ">
-            <button type="button"  className="border btn m-3 border-info" style={{backgroundColor: "#b7e778"}} /* onClick={() => {setInput([...recip, <recip defaultValue={recip.length + 1} />]);}} */ >Schritt </button>
+            <button type="button"  className="border btn btn-rounded m-4  border-info" style={{backgroundColor: "#b7e778"}} /* onClick={() => {setInput([...recip, <recip defaultValue={recip.length + 1} />]);}} */ >Schritt </button>
           </li>
           <li className ="nav-item w-75 ">
-            <button type="button"  className="border  btn m-3 border-info" style={{backgroundColor: "#b7e778"}} >Transition</button>
+            <button type="button"  className="border  btn btn-rounded m-4  border-info" style={{backgroundColor: "#b7e778"}} >Transition</button>
           </li>
           <li className ="nav-item w-75">
-            <button type="button" className="border btn m-3 border-info" style={{backgroundColor: "#b7e778"}}>Action</button>
+            <button type="button" className="border btn btn-rounded m-4  border-info" style={{backgroundColor: "#b7e778"}}>Action</button>
           </li>
           <li className ="nav-item w-75">
-            <button type="button"  className="border btn m-3 border-info" style={{backgroundColor: "#b7e778"}}>UP</button>
+            <button type="button"  className="border btn btn-rounded m-4  border-info" style={{backgroundColor: "#b7e778"}}>UP</button>
           </li>
           <li className ="nav-item w-75">
-            <button type="button"  className="border btn m-3 border-info" style={{backgroundColor: "#b7e778"}}>Down</button>
+            <button type="button"  className="border btn btn-rounded m-4  border-info" style={{backgroundColor: "#b7e778"}}>Down</button>
           </li>
           <Link to="/">
           <li className ="nav-item pt-5 mt-5 w-75">
-            <button type="button"  className="border btn m-3 border-info" style={{backgroundColor: "#b7e778"}}>Back</button>
+            <button type="button"  className="border btn btn-rounded m-4  border-info" style={{backgroundColor: "#b7e778"}}>Back</button>
           </li>
           </Link>
           </ul>
@@ -219,9 +218,13 @@ const Phase = () => {
 </table>
         </div>
        }
+
+
+</div>
+
           </div>
        
-        </div>
+        
 
         {visible && 
         <div className="border w-25 border-info">
@@ -237,7 +240,8 @@ const Phase = () => {
            </ul>
 
           </div>
-}
+      }
+   </div>
        </div>
       </div>
     </div>

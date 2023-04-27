@@ -7,7 +7,7 @@ const Project = () => {
 
     return(
        <>
-          <ul className="d-flex tree mt-5 p-0 ">
+          <ul className="d-flex tree mt-4 p-0 ">
             <li>
               <details open>
                 <summary className="pb-3"><input  id="message" type="text"  className="border border-success" defaultValue=" Novartis-Insulin"  /> Project Name </summary>
