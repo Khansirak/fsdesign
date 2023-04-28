@@ -25,15 +25,9 @@ const Graph = () => {
     <div className=" menu-body2 d-flex flex-row w-100">
     <div className="fixed-top text-center mt-2" style={{paddingLeft:"50em"}} > 
       <button type="button"  className="border text-dark m-2 px-5 p-2  btn border-info" style={{backgroundColor: "#b7e778"}} > <h4>Grahp</h4> </button>
- 
       </div> 
-
-    
-
       <div className=" d-flex row border w-100 border-info "  >
 
-     
-       
        <div className ="d-flex p-0 justify-content-between ">
        <div>
             <button type="button"  className="border text-center m-1 btn border-info" style={{backgroundColor: "#C0C0C0"}} onClick={removeElement2} >Management</button>
@@ -44,11 +38,8 @@ const Graph = () => {
             <button type="button"  className="border m-1 btn border-info" style={{backgroundColor: "#C0C0C0"}} onClick={removeElement}>List-toolbox</button>
             </div>
           </div>
-   
 
-       <div className="d-flex p-0 h-100" >
-    
-    
+       <div className="d-flex p-0 h-100" >  
         <div className="d-flex column border h-100 w-50 border-info" > 
         {visibles2&& 
         <div className=" border w-50 m-0 border-info">

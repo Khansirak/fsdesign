@@ -7,7 +7,7 @@ import './library.css';
 import 'reactflow/dist/style.css';
 import './logic.css';
 import { mockData } from './mocklibrary';
-import App  from './logicpractice';
+import App  from './flow';
 import Image from "./AND_1.png";
 
 import { useCallback } from 'react';
@@ -23,9 +23,9 @@ import ReactFlow, {
 //NEED TO STAY OUTSIDE
 
 const initialNodes = [
-  { id: '1', sourcePosition: 'right', targetPosition: 'left',  position: { x: -200, y: -350 }, data: { label: <img src={Image} style={{width:"100px", height:"100px"}}/>} },
-  { id: '4', sourcePosition: 'right', targetPosition: 'left',  position: { x: -500, y: -300 }, data: { label: <input type="text" defaultValue="input" className="w-100"   />} },
-  { id: '5', sourcePosition: 'right', targetPosition: 'left', position: { x: 500, y: -300 }, data: {  label: <input type="text" defaultValue="output" className="w-100"   />} },
+  { id: '1', sourcePosition: 'right', targetPosition: 'left',  position: { x: 0, y: 0 }, data: { label: <img src={Image} style={{width:"100px", height:"100px"}}/>} },
+  { id: '4', sourcePosition: 'right', targetPosition: 'left',  position: { x: -600, y: -200 }, data: { label: <input type="text" defaultValue="input" className="w-100"   />} },
+  { id: '5', sourcePosition: 'right', targetPosition: 'left', position: { x: 600, y: -200 }, data: {  label: <input type="text" defaultValue="output" className="w-100"   />} },
 
 ];
 const initialEdges = [{ id: 'e1-2', source: '1', target: '2',type: 'step', }];
@@ -59,22 +59,19 @@ const Logic = () => {
     setVisibles2((prev) => !prev);
   };
 
-////////
+//////// FOR THE DIAGRAM LOGIC
 
 
 const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
-  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
-
-  const onConnect = useCallback((params) => setEdges((eds) => addEdge(params, eds)), [setEdges]);
-
-
+const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+const onConnect = useCallback((params) => setEdges((eds) => addEdge(params, eds)), [setEdges]);
 
 const Addnode = useCallback(() => {
   const node =  {
     id: uuidv4(),
     sourcePosition: 'right', targetPosition: 'left',
     data: { label: <input type="text" defaultValue="input" className="w-100"   />},
-    position: { x: -400, y: -300 },
+    position: { x: -600, y: -300 },
   }
   //To BE DELETED
   setNodes([...nodes, node]);
@@ -87,65 +84,42 @@ const AddnodeOutput = useCallback(() => {
     id: uuidv4(),
     sourcePosition: 'right', targetPosition: 'left',
     data: { label: <input type="text" defaultValue="output" className="w-100"   />},
-    position: { x: 400, y: -200 },
+    position: { x: 600, y: -100 },
   }
   setNodes([...nodes, node]);
   
 }, [nodes]);
 
-const AddnodeBlock = useCallback(() => {
- 
+
+const getImg = useCallback((e) => {
+  const btnId=e.target.id;
+  console.log(btnId);
   const node =  {
    id: uuidv4(), 
    sourcePosition: 'right',
     targetPosition: 'left',
     position: { x: 100, y: -200 },
-     data: { label: <img src={require(`../images/${name}`)} style={{width:"100px", height:"100px"}}/>},
+     data: { label: <img src={require(`../images/${btnId}`)} style={{width:"100px", height:"100px"}}/>},
   }
   setNodes([...nodes, node]);
   
   console.log(node);
-  console.log(name);
+  
 }, [nodes]);
-const KP = useCallback(() => {
- 
- 
-  console.log(name);
-}, []);
+
 /////
 
-//for logic
+///for LIST-TOOLBOX
   const [visible, setVisible] = useState(true);
 
-//persist the output field NOT WORKING 
- 
-//const [input, setInput] = useState(0);
-
-//const DraggableInput = ({id}) => {
-//  const updateXarrow = useXarrow();
-//  return (
-//      <Draggable onDrag={updateXarrow} onStop={updateXarrow}>
-//          <div id="input1" className="mt-2" style={{border: "grey solid 2px", borderRadius: "10px", width:"1005", height:"auto"}}>
-//          <input type="text" className="w-100"   />
-//          </div>/
-//      </Draggable>
-//  );
-//};
-
-//const addInput = (e) => {
-// 
-// setInput(input+1);
-// }
-
- 
-
-  //logic/libary change display
+//logic/libary change display
   const [show, setShow] = useState(false);
   const [show1, setShow1] = useState(true);
   const showElement = () => {
     setShow((prev) => !prev);
     setShow1((prev) => !prev);
   };
+  
     return(
        <>
       
@@ -164,17 +138,15 @@ const KP = useCallback(() => {
 <div className="d-flex p-0 border border-info">
 {visibles2&& 
 
- <div className=" w/50 m-0" style={{width:"15%"}}>
+ <div className=" m-0" style={{width:"15%"}}>
  <Project />
  </div>
 }  
        <div className="d-flex w-100 h-100" >
 
-        <div className="d-flex border h-100 border-info" > 
-        jii       
-        <div className=" row" >
-        <nav className ="navbar ">
-          <ul className ="nav m-2 d-flex  text-center justify-content-around navbar-nav">
+        <div className="row text-center border border-info"  style={{width:"10%"}} > 
+        <nav className ="navbar " >
+          <ul className ="nav d-flex  text-center justify-content-around navbar-nav">
           
           <li className ="nav-item w-75 ">
             <button type="button"  className="border btn btn-rounded m-4 border-info" style={{backgroundColor: "#b7e778"}} onClick={showElement} >Library </button>
@@ -196,7 +168,7 @@ const KP = useCallback(() => {
           </Link>
           </ul>
           </nav>
-      </div>
+   
         </div>
         {show &&
         <div className="d-flex border w-100 border-info" >        
@@ -237,19 +209,15 @@ const KP = useCallback(() => {
         }
             <div>   
             <ul className ="nav m-2 d-flex w-100 text-center justify-content-around navbar-nav">
-          <li className ="nav-item  ">
-          <button type="button"  className="border btn m-3 border-info" style={{backgroundColor: "#b7e778"}} onClick={AddnodeBlock }  >Add to Logic </button>
-
-          </li>
           <li className ="nav-item ">
             <button type="button"  className="border w-75 btn m-3 border-info" style={{backgroundColor: "#b7e778"}} >Add input</button>
           </li>
           </ul></div>
 
-          <div className="border w-25  border-info">
+          <div className="border w-25  border-info" >
           <img className="logic-button-show  p-4"  src={require(`../images/${name}`)} />
 
-          <button type="button"  className="border btn m-3 border-info" style={{backgroundColor: "#b7e778"}} onClick={KP }  >Add to Logic </button>
+          <button type="button"  className="border btn m-3 border-info" style={{backgroundColor: "#b7e778"}} id={name} onClick={getImg }  >Add to Logic</button>
 
        </div>
              </section>
