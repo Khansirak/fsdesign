@@ -1,8 +1,8 @@
 import React from "react";
-
-
 import { Link } from 'react-router-dom';
 import Recipe from './recipe';
+
+
 const Project = () => {
 
     return(
@@ -36,24 +36,19 @@ const Project = () => {
                               <details >
                               <summary className="pb-3"><input  id="message" type="text"  className="border border-success" defaultValue=" Ilock"  /> Interlock </summary>
                               <ul className='pb-3'>
-                        <li><input type="text" id="message3" className="border border-success" defaultValue="Ilock1" /> <Link to="/interlock-module">Agitator </Link>  </li>
-                        
+                        <li><input type="text" id="message3" className="border border-success" defaultValue="Ilock1" /> <Link to="/interlock-module">Agitator </Link>  </li> 
                       </ul>
                               </details>
-                          </li>
-                          
-                        </li>
-                        
+                          </li>    
+                        </li>     
                   <li>
                     <details>
                       <summary className="pb-3">Human Machine Interface</summary>
                       <ul>
-                        <li><input type="text" id="message3" className="border border-success" defaultValue="HMI1"  /> Name-number </li>
-                        
+                        <li><input type="text" id="message3" className="border border-success" defaultValue="HMI1"  /> Name-number </li>  
                       </ul>
                     </details>
                   </li>
-
                   </ul>
                 </details>                                 
                   </li>

@@ -21,6 +21,9 @@ const Phase = () => {
   const removeElement2 = () => {
     setVisibles2((prev) => !prev);
   };
+  const myRecipe = JSON.parse(localStorage.getItem('recipe'));
+
+  
     return(
        <>
       <div className="fixed-top text-center mt-2" style={{paddingLeft:"50em"}} > 
@@ -102,7 +105,7 @@ const Phase = () => {
           <div className="d-flex h-100">
 
           <div className="border w-100 border-info" >        
-          <text className=" border-bottom d-flex  justify-content-center p-2 border-info "> Phase-name-Number  Run:O </text>
+          <text className=" border-bottom d-flex  justify-content-center p-2 border-info "> {myRecipe}  Run:O </text>
           <section className="d-flex p-2 mb-5 justify-content-between"> 
 
             <button className="p-0 no-border" style={{width:"3em", height:"3em"}}> <img alt="detail" className="image" src={Detail} style={{width:"100%", height:"100%"}} onClick={get_detail}/> </button>

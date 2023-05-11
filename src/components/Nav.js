@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-
+import FSlogo from '../images/fsdesignlogo.png'
 import './nav.css';
 
 const Nav = () => {
@@ -18,11 +18,11 @@ const Nav = () => {
 
 
 <div className="d-flex flex-row justify-content-between ">
-      <div className="d-flex flex-row justify-content-around ">
-        <div className="ms-5 me-5" >
-          <img alt="logo" className="image"  />
-        </div>
-
+      <div className="d-flex flex-row text=center align-items-start ">
+      
+          <img alt="logo" src={FSlogo} className="image"  />
+        
+      <div>
         <ul className=" border d-flex justify-content-around list-unstyled p-2 ml-5 border-info" style={{backgroundColor: "#b7e778",color:"black"}}>
           <li >
             <Link to="/" style={{color:"black", fontWeight:'normal'}}>Menu</Link>
@@ -34,7 +34,7 @@ const Nav = () => {
             <Link to="/trf" style={{color:"black", fontWeight:'normal'}}>Tool</Link>
           </li>
           <li  >
-            <Link to="/m" style={{color:"black", fontWeight:'normal'}}>User</Link>
+            <Link to="/user" style={{color:"black", fontWeight:'normal'}}>User</Link>
           </li>
           <li >
             <Link to="/dfg"style={{color:"black", fontWeight:'normal'}}>Revision</Link>
@@ -46,6 +46,7 @@ const Nav = () => {
             <Link to="/srg"style={{color:"black", fontWeight:'normal'}}>Submit</Link>
           </li>
         </ul>
+        </div>
       </div>
       <div className="ms-5 me-5" >
           <img alt="logo" className="image" />

@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import Project from './project';
 import { Link } from 'react-router-dom';
 import './phase.css';
-
-
-
+import LineChart from "./linechart";
+import LineChart1 from "./linechart1";
+//IMPORTANTE DO NOT DELETE
+import { Chart as ChartJS } from 'chart.js/auto'
 
 const Graph = () => {
   const [visible, setVisible] = useState(true);
@@ -12,12 +13,35 @@ const Graph = () => {
   const removeElement = () => {
     setVisible((prev) => !prev);
   };
-
   const removeElement2 = () => {
     setVisibles2((prev) => !prev);
   };
 
+  //FOR CHART
+  const labels = ["", "", "", "", "", "", ""];
 
+const data = {
+  labels: labels,
+  datasets: [
+    {
+      label: "My First dataset",
+      backgroundColor: "rgb(255, 99, 132)",
+      borderColor: "rgb(255, 99, 132)",
+      data: [1,10],
+    },
+  ],
+};
+const data1 = {
+  labels: labels,
+  datasets: [
+    {
+      label: "My First dataset",
+      backgroundColor: "rgb(255, 99, 132)",
+      borderColor: "green",
+      data: [1,3,5,10,4, 6,2,12],
+    },
+  ],
+};
     return(
        <>
        
@@ -40,40 +64,39 @@ const Graph = () => {
           </div>
 
        <div className="d-flex p-0 h-100" >  
-        <div className="d-flex column border h-100 w-50 border-info" > 
         {visibles2&& 
-        <div className=" border w-50 m-0 border-info">
-  
+        <div className=" border  m-0 border-info" style={{width:"20%"}}>
           <Project />
         </div> 
 }    
-        <div className="d-flex w-50 row justify-content-around" >
-        <nav className ="d-flex row justify-content-between">
-          <ul className ="nav p-4 d-flex flex-wrap  ">
+        <div className="d-flex border  w-100 border-info" >  
+        <div className="d-flex p-2" style={{width:"17%"}} >
+        <nav className =" row">
+          <ul className ="nav d-flex flex-wrap ">
         
           <li className ="nav-item w-50 ">
-            <button type="button"  className="border btn btn-rounded    border-info" style={{backgroundColor: "#b7e778"}} >New coordinate </button>
+            <button type="button"  className="border btn btn-rounded m-3 p-0 border-info" style={{backgroundColor: "#b7e778"}} >New coordinate </button>
           </li>
           <li className ="nav-item w-50 ">
-            <button type="button"  className="border  btn m-1 w-75  border-info" style={{backgroundColor: "#b7e778"}} >Horizontal Line</button>
+            <button type="button"  className="border btn btn-rounded m-3  p-0 border-info" style={{backgroundColor: "#b7e778"}} >Horizontal Line</button>
           </li>
           <li className ="nav-item w-50">
-            <button type="button" className="border btn m-1 w-75 border-info" style={{backgroundColor: "#b7e778"}}>Auxiliary Line horizontal</button>
+            <button type="button" className="border btn btn-rounded m-3 p-0 border-info" style={{backgroundColor: "#b7e778"}}>Auxiliary Line horizontal</button>
           </li>
           <li className ="nav-item w-50">
-            <button type="button"  className="border btn m-1  w-75 border-info" style={{backgroundColor: "#b7e778"}}>Text</button>
+            <button type="button"  className="border btn btn-rounded m-3 p-0 w-75 border-info" style={{backgroundColor: "#b7e778"}}>Text</button>
           </li>
           <li className ="nav-item w-50">
-            <button type="button"  className="border btn m-1  w-75 border-info" style={{backgroundColor: "#b7e778"}}>New Page</button>
+            <button type="button"  className="border btn btn-rounded m-3 w-75 p-0 border-info" style={{backgroundColor: "#b7e778"}}>New Page</button>
           </li>
           <li className ="nav-item  w-50">
-            <button type="button"  className="border btn m-1 w-75 border-info" style={{backgroundColor: "#b7e778"}}>Free Hand Line</button>
+            <button type="button"  className="border btn btn-rounded m-3 w-75 p-0 border-info" style={{backgroundColor: "#b7e778"}}>Free Hand Line</button>
           </li>
           <li className ="nav-item w-50">
-            <button type="button"  className="border btn m-1 w-75 border-info" style={{backgroundColor: "#b7e778"}}>Auxiliary Line vertical</button>
+            <button type="button"  className="border btn btn-rounded m-3 w-75 p-0 border-info" style={{backgroundColor: "#b7e778"}}>Auxiliary Line vertical</button>
           </li>
           <li className ="nav-item  w-50">
-            <button type="button"  className="border btn m-1 w-75 border-info" style={{backgroundColor: "#b7e778"}}>Vertical Line</button>
+            <button type="button"  className="border btn btn-rounded m-3 w-75 p-0 border-info" style={{backgroundColor: "#b7e778"}}>Vertical Line</button>
           </li>
           
           </ul>
@@ -86,18 +109,14 @@ const Graph = () => {
           </ul>
           
           </nav>
-  
       </div>
-        </div>
-
-        <div className="border w-100 border-info" >  
-
-          <div className="d-flex h-100">
+          <div className="d-flex w-100 h-100">
           <div className="border w-100 border-info" >        
           <h3 className="border-bottom text-center border-info"> Graph </h3>
-          <section className="d-flex p-4 h-100 justify-content-center"> 
-              
-          
+          <section className="d-flex row p-4 h-100 justify-content-center"> 
+       
+          <LineChart chartData={data}  />
+          <LineChart1 chartData={data1}  />
              </section>
         </div>
 

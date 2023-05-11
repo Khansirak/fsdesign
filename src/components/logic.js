@@ -7,28 +7,34 @@ import './library.css';
 import 'reactflow/dist/style.css';
 import './logic.css';
 import { mockData } from './mocklibrary';
-import App  from './flow';
 import Image from "./AND_1.png";
+import TextUpdaterNode from './TextUpdaterNode.js';
+import TextUpdaterNodeOutput from './TextUpdaterNodeOutput.js'
+import ImgNode from './ImgNode.js';
 
 import { useCallback } from 'react';
 import ReactFlow, {
+  
   MiniMap,
   Controls,
   useNodesState,
   useEdgesState,
   addEdge,
   StepEdge,
+  useReactFlow,
+  Panel,
 } from 'reactflow';
 
 //NEED TO STAY OUTSIDE
+const getNodeId = () => `randomnode_${+new Date()}`;
+const initialNodes = [];
+const initialEdges = [{ id: 'e1-2',key:"1", source: '1', target: '2',type: 'step', }];
+const nodeTypes = {
+  textUpdater: TextUpdaterNode,
+  ImgNodeUpd: ImgNode,
+  textUpdaterO:TextUpdaterNodeOutput,
+};
 
-const initialNodes = [
-  { id: '1', sourcePosition: 'right', targetPosition: 'left',  position: { x: 0, y: 0 }, data: { label: <img src={Image} style={{width:"100px", height:"100px"}}/>} },
-  { id: '4', sourcePosition: 'right', targetPosition: 'left',  position: { x: -600, y: -200 }, data: { label: <input type="text" defaultValue="input" className="w-100"   />} },
-  { id: '5', sourcePosition: 'right', targetPosition: 'left', position: { x: 600, y: -200 }, data: {  label: <input type="text" defaultValue="output" className="w-100"   />} },
-
-];
-const initialEdges = [{ id: 'e1-2', source: '1', target: '2',type: 'step', }];
 /////
 
 const Logic = () => {
@@ -37,7 +43,7 @@ const Logic = () => {
   const [name, setName] = React.useState("AND_1.png");
   const [visible1, setVisible1] = useState(true);
   const [visibles, setVisibles] = useState(false);
-  const [visibles2, setVisibles2] = useState(true);
+  const [visibles2, setVisibles2] = useState(false);
   const [active, setActive] = useState(false);
   const [active1, setActive1] = useState(false);
   const removeElement1 = () => {
@@ -61,56 +67,78 @@ const Logic = () => {
 
 //////// FOR THE DIAGRAM LOGIC
 
-
-const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
+const [nodes, setNodes,onNodesChange] = useNodesState(initialNodes);
 const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+const [rfInstance, setRfInstance] = useState(null);
+const { setViewport } = useReactFlow();
 const onConnect = useCallback((params) => setEdges((eds) => addEdge(params, eds)), [setEdges]);
+
+const onSave = useCallback(() => {
+  if (rfInstance) {
+    const flow = rfInstance.toObject();
+    localStorage.setItem("flow", JSON.stringify(flow));
+  }
+}, [rfInstance]);
+
+const onRestore = useCallback(() => {
+  const restoreFlow = async () => {
+    const flow = JSON.parse(localStorage.getItem("flow"));
+    console.log(flow)
+    if (flow) {
+      const { x = 0, y = 0, zoom = 1 } = flow.viewport;
+      setNodes(flow.nodes || []);
+      setEdges(flow.edges || []);
+      setViewport({ x, y, zoom });
+    }
+  };
+  restoreFlow();
+}, [setNodes, setViewport]);
+
 
 const Addnode = useCallback(() => {
   const node =  {
-    id: uuidv4(),
-    sourcePosition: 'right', targetPosition: 'left',
-    data: { label: <input type="text" defaultValue="input" className="w-100"   />},
+    id: getNodeId(),
+    targetPosition: 'left', sourcePosition:"right",
+    type: 'textUpdater',
+    data: { label: "a"},
     position: { x: -600, y: -300 },
   }
-  //To BE DELETED
   setNodes([...nodes, node]);
-  
-  console.log(node)
 }, [nodes]);
+
+
 
 const AddnodeOutput = useCallback(() => {
   const node =  {
-    id: uuidv4(),
-    sourcePosition: 'right', targetPosition: 'left',
-    data: { label: <input type="text" defaultValue="output" className="w-100"   />},
+    id: getNodeId(),
+    targetPosition: 'left', sourcePosition:"right",
+    type: 'textUpdaterO',
+    data: { label: "a"},
     position: { x: 600, y: -100 },
   }
   setNodes([...nodes, node]);
-  
 }, [nodes]);
 
-
 const getImg = useCallback((e) => {
+  
   const btnId=e.target.id;
-  console.log(btnId);
   const node =  {
-   id: uuidv4(), 
+   id: getNodeId(), 
    sourcePosition: 'right',
     targetPosition: 'left',
     position: { x: 100, y: -200 },
-     data: { label: <img src={require(`../images/${btnId}`)} style={{width:"100px", height:"100px"}}/>},
+    type: 'ImgNodeUpd',
+     data: {  image:require(`../images/${btnId}`) },
   }
   setNodes([...nodes, node]);
-  
-  console.log(node);
-  
+  //localStorage.setItem('nodes',JSON.stringify(nodes));
 }, [nodes]);
 
-/////
+/////FOR THE LOGIC DIAGRAM PERSITENCE MEMORY
+
 
 ///for LIST-TOOLBOX
-  const [visible, setVisible] = useState(true);
+  const [visible, setVisible] = useState(false);
 
 //logic/libary change display
   const [show, setShow] = useState(false);
@@ -158,9 +186,11 @@ const getImg = useCallback((e) => {
           <li className ="nav-item w-75">
             <button type="button"  className="border btn btn-rounded m-4  border-info" style={{backgroundColor: "#b7e778"}} onClick={AddnodeOutput } >New Output Parameter</button>
           </li>
+          <Link to="/graph">
           <li className ="nav-item w-75">
             <button type="button"  className="border btn btn-rounded m-4  border-info" style={{backgroundColor: "#b7e778"}}>New Graph</button>
           </li>
+          </Link>
           <Link to="/phase">
           <li className ="nav-item pt-5 mt-5 w-75">
             <button type="button"  className="border btn btn-rounded m-4  border-info" style={{backgroundColor: "#b7e778"}}>Back</button>
@@ -244,10 +274,12 @@ const getImg = useCallback((e) => {
                   onNodesChange={onNodesChange}
                   onEdgesChange={onEdgesChange}
                   onConnect={onConnect}
+                  onInit={setRfInstance}
+                  nodeTypes={nodeTypes}
                   fitView
                   attributionPosition="bottom-left"
                   edgeTypes={{ default: StepEdge }}
-                  
+
                  >
               <MiniMap />
               <Controls />
@@ -255,6 +287,11 @@ const getImg = useCallback((e) => {
                  <div className=" border text-center  border-info"  style={{width: '15%'}}> <h4 className="border border-info">Inputs</h4></div>
                  <div className=" border text-center  border-info" style={{width: '15%'}}> <h4 className="border border-info">Outputs</h4></div>
               </div>
+
+              <Panel position="bottom-right">
+                <button onClick={onSave}>save</button>
+                <button onClick={onRestore}>restore</button>
+              </Panel>
                 
               </ReactFlow>
     </div>

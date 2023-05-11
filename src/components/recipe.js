@@ -1,18 +1,29 @@
-import React from "react";
-
-
+import React, { useState,useEffect } from "react";
 import { Link } from 'react-router-dom';
 
 const Recipe = () => {
+  const [recipe, setRecipe] = useState();
+
+
+  function handleInputChange(event){
+    const name = event.target.value;
+    setRecipe(name);
+    localStorage.setItem('recipe',JSON.stringify(name));
+  };
+
+  useEffect(() => {
+    const storedName = localStorage.getItem('recipe' );
+    if (storedName) {
+      setRecipe(JSON.parse(storedName));
+    }
+  }, [recipe]);
 
     return(
        <>
         <li>
         <details open>
-          <summary className="pb-2"><input id="message2" type="text" className="border border-success" defaultValue="Recipe"  /> 
-          <Link to="/phase">Recipe-name</Link>
-           
-           
+          <summary className="pb-2"><input id="message2" type="text" className="border border-success" defaultValue={recipe} onChange={handleInputChange} /> 
+          <Link to="/phase"  >Recipe-name</Link>           
            </summary>
           <ul className='d-flex flex-column pb-1'>
           <li > 
