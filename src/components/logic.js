@@ -28,7 +28,7 @@ import ReactFlow, {
 //NEED TO STAY OUTSIDE
 const getNodeId = () => `randomnode_${+new Date()}`;
 const initialNodes = [];
-const initialEdges = [{ id: 'e1-2',key:"1", source: '1', target: '2',type: 'step', }];
+const initialEdges = [];
 const nodeTypes = {
   textUpdater: TextUpdaterNode,
   ImgNodeUpd: ImgNode,
@@ -72,7 +72,7 @@ const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
 const [rfInstance, setRfInstance] = useState(null);
 const { setViewport } = useReactFlow();
 const onConnect = useCallback((params) => setEdges((eds) => addEdge(params, eds)), [setEdges]);
-
+/////FOR THE LOGIC DIAGRAM PERSITENCE MEMORY
 const onSave = useCallback(() => {
   if (rfInstance) {
     const flow = rfInstance.toObject();
@@ -94,7 +94,7 @@ const onRestore = useCallback(() => {
   restoreFlow();
 }, [setNodes, setViewport]);
 
-
+///////////////////////
 const Addnode = useCallback(() => {
   const node =  {
     id: getNodeId(),
@@ -131,10 +131,9 @@ const getImg = useCallback((e) => {
      data: {  image:require(`../images/${btnId}`) },
   }
   setNodes([...nodes, node]);
-  //localStorage.setItem('nodes',JSON.stringify(nodes));
 }, [nodes]);
 
-/////FOR THE LOGIC DIAGRAM PERSITENCE MEMORY
+
 
 
 ///for LIST-TOOLBOX

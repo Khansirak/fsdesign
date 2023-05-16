@@ -1,27 +1,31 @@
-import { useCallback } from 'react';
-import { Handle, Position } from 'reactflow';
-import Image from "./AND_1.png";
+import { Handle } from 'reactflow';
 
-function ImgNode({ data, isConnectable }) {
 
-    const customPositions = {
-        myPosition: {
-          top: '-50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-        },
-        // Add more custom positions here
-      };
-      
+function ImgNode({ data, isConnectable }) {  
   return (
-    <div>
-      <Handle type="target" position="left" id="a" style={{ top: "0px" }} isConnectable={isConnectable} />
-      <Handle type="target" position="left" id="b" style={{ bottom: "1px"}} isConnectable={isConnectable} />
-      {/* {sourceHandles.map((handle, index) => (
-            <Handle key={`handle-${index}`} type="target" position={handle.position} style={{ background: '#555' }} />
-          ))} */}
-      <img src={data.image} alt="Node Image"  style={{width:"100px", height:"100px"}} />
-      <Handle type="source" position="right" style={{ background: "#555" }} isConnectable={isConnectable} />
+    <div style={{width:"100px"}}>
+
+      <Handle type="target" position="left" id="16" style={{   bottom: "0%", backgroundColor:"rgba(0, 0, 0, 0)",opacity: "0" }} isConnectable={isConnectable} />
+      <Handle type="target" position="left" id="0" style={{  top: "20%", backgroundColor:"rgba(0, 0, 0, 0)",opacity: "0" }} isConnectable={isConnectable} />
+      <Handle type="target" position="left" id="1" style={{  top: "30%", backgroundColor:"rgba(0, 0, 0, 0)",opacity: "0" }} isConnectable={isConnectable} />
+      <Handle type="target" position="left" id="2" style={{  top: "40%", backgroundColor:"rgba(0, 0, 0, 0)",opacity: "0" }} isConnectable={isConnectable} />
+      <Handle type="target" position="left" id="3" style={{  top: "60%", backgroundColor:"rgba(0, 0, 0, 0)",opacity: "0" }} isConnectable={isConnectable} />
+      <Handle type="target" position="left" id="4" style={{  top: "70%", backgroundColor:"rgba(0, 0, 0, 0)",opacity: "0" }} isConnectable={isConnectable} />
+      <Handle type="target" position="left" id="5" style={{  top: "80%", backgroundColor:"rgba(0, 0, 0, 0)",opacity: "0" }} isConnectable={isConnectable} />
+      <Handle type="target" position="left" id="6" style={{  top: "95%", backgroundColor:"rgba(0, 0, 0, 0)",opacity: "0" }} isConnectable={isConnectable} />
+      <Handle type="target" position="left" id="15" style={{  top: "87%", backgroundColor:"rgba(0, 0, 0, 0)",opacity: "0" }} isConnectable={isConnectable} />
+    <img src={data.image} alt="Node Image" className="img-fluid" />
+      <Handle type="source" position="right" id ="7"  style={{ bottom: "0%", background: "black", opacity: "0" }} isConnectable={isConnectable} />
+      <Handle type="source" position="right" id ="8" style={{ top: "20%", background: "rgba(0, 0, 0, 0)",opacity: "0" }} isConnectable={isConnectable} />
+      <Handle type="source" position="right" id ="9" style={{ top: "30%", background: "rgba(0, 0, 0, 0)",opacity: "0" }} isConnectable={isConnectable} />
+      <Handle type="source" position="right" id ="13" style={{ top: "40%", background: "rgba(0, 0, 0, 0)",opacity: "0" }} isConnectable={isConnectable} />
+      <Handle type="source" position="right" id ="10" style={{ top: "60%", background: "rgba(0, 0, 0, 0)",opacity: "0" }} isConnectable={isConnectable} />
+      <Handle type="source" position="right" id ="14" style={{ top: "70%", background: "rgba(0, 0, 0, 0)",opacity: "0" }} isConnectable={isConnectable} />
+      <Handle type="source" position="right" id ="11" style={{ top: "80%", background: "rgba(0, 0, 0, 0)",opacity: "0" }} isConnectable={isConnectable} />
+      <Handle type="source" position="right" id ="17" style={{ top: "87%", background: "rgba(0, 0, 0, 0)",opacity: "0" }} isConnectable={isConnectable} />
+      <Handle type="source" position="right" id ="12" style={{ top: "95%", background: "rgba(0, 0, 0, 0)",opacity: "0" }} isConnectable={isConnectable} />
+  
+     
     </div>
   );
 }
