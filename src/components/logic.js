@@ -7,7 +7,7 @@ import './library.css';
 import 'reactflow/dist/style.css';
 import './logic.css';
 import { mockData } from './mocklibrary';
-import Image from "./AND_1.png";
+import { mockDataController } from './mocklibrarycontroller';
 import TextUpdaterNode from './TextUpdaterNode.js';
 import TextUpdaterNodeOutput from './TextUpdaterNodeOutput.js'
 import ImgNode from './ImgNode.js';
@@ -155,14 +155,14 @@ const getImg = useCallback((e) => {
     <div className="fixed-top text-center mt-2" style={{paddingLeft:"50em"}} > 
       <button type="button"  className="border text-dark m-2 px-5 p-2  btn border-info" style={{backgroundColor: "#b7e778"}} > <h4>Logic</h4> </button>
       </div> 
-      <div className=" d-flex row border  w-100 border-info "  >
+      <div className=" d-flex row border m-0 w-100 border-info "  >
 
       <div className =" d-flex p-2  justify-content-between ">
         <button type="button"  className="border m-1 btn border-info" style={{backgroundColor: "#C0C0C0"}}  onClick={removeElement2}>Management</button>
   
             <button type="button"  className="border m-1 btn border-info" style={{backgroundColor: "#C0C0C0"}} onClick={removeElement}>List-toolbox</button>
           </div>
-<div className="d-flex p-0 border border-info">
+<div className="d-flex p-0 h-100 border border-info">
 {visibles2&& 
 
  <div className=" m-0" style={{width:"15%"}}>
@@ -171,7 +171,7 @@ const getImg = useCallback((e) => {
 }  
        <div className="d-flex w-100 h-100" >
 
-        <div className="row text-center border border-info"  style={{width:"10%"}} > 
+        <div className="row text-center m-0 border border-info"  style={{width:"10%"}} > 
         <nav className ="navbar " >
           <ul className ="nav d-flex  text-center justify-content-around navbar-nav">
           
@@ -217,7 +217,7 @@ const getImg = useCallback((e) => {
             </div>
 
             {visible1 && 
-            <div className=" forscroll border w-100   border-dark " >
+            <div className=" forscroll border w-100  border-dark " >
               
             { mockData.map((data) => (
               
@@ -227,11 +227,11 @@ const getImg = useCallback((e) => {
         }
         
         {visibles && 
-            <div className="d-flex forscroll border w-100  align-content-center flex-wrap border-dark " >
+            <div className="d-flex forscroll border w-100   align-content-start flex-wrap border-dark " >
               
-            { mockData.map((data) => (
+            { mockDataController.map((data) => (
               
-              <button className="logic-btn" onClick={() => setName(data.src)}><img className="logic-button" alt={data.src} src={require(`../images/${name}`)} /></button>
+              <button className="logic-btn  w-25" onClick={() => setName(data.src)}><img className="logic-button" alt={data.src} src={require(`../images/${data.src}`)} /></button>
             ))}
             
           </div>
@@ -244,9 +244,9 @@ const getImg = useCallback((e) => {
           </ul></div>
 
           <div className="border w-25  border-info" >
-          <img className="logic-button-show  p-4"  src={require(`../images/${name}`)} />
+          <img className="logic-button-show  p-2"  src={require(`../images/${name}`)} />
 
-          <button type="button"  className="border btn m-3 border-info" style={{backgroundColor: "#b7e778"}} id={name} onClick={getImg }  >Add to Logic</button>
+          <button type="button"  className="border btn m-4 border-info" style={{backgroundColor: "#b7e778"}} id={name} onClick={getImg }  >Add to Logic</button>
 
        </div>
              </section>
@@ -283,8 +283,8 @@ const getImg = useCallback((e) => {
               <MiniMap />
               <Controls />
               <div className="d-flex h-100 justify-content-between ">
-                 <div className=" border text-center  border-info"  style={{width: '15%'}}> <h4 className="border border-info">Inputs</h4></div>
-                 <div className=" border text-center  border-info" style={{width: '15%'}}> <h4 className="border border-info">Outputs</h4></div>
+                 <div className=" border text-center  border-info"  style={{width: '15%'}}> <h4 className="border-bottom border-info">Inputs</h4></div>
+                 <div className=" border text-center  border-info" style={{width: '15%'}}> <h4 className="border-bottom border-info">Outputs</h4></div>
               </div>
 
               <Panel position="bottom-right">

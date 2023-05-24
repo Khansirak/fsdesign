@@ -8,7 +8,11 @@ const Interlock = () => {
    const [column1, setInput] = useState([<Addcolumn1 defaultValue={1} />]);
    const [column2, setInput2] = useState([<Addcolumn1 defaultValue={1} />]);
    const [row1, setInput3] = useState([<Addrow1 defaultValue={1} />]);
-
+///for LIST-TOOLBOX
+const [visible, setVisible] = useState(false);
+const removeElement = () => {
+  setVisible((prev) => !prev);
+};
   return (
 <>
 
@@ -32,10 +36,15 @@ const Interlock = () => {
       </div>
 
       <div className=" border w-100 border-info h-100"  >
-        <div className=" text-center p-2 font-weight-bold"> Management</div>
+        <div className=" text-center p-2 font-weight-bold"> 
+                <div className="d-flex  justify-content-between  "> 
+        <div className="col text-center "><h4 className=" p-2 "> Interlock</h4></div> 
+       <div> <button type="button"  className="border d-flex m-1 btn border-info" style={{backgroundColor: "#C0C0C0"}} onClick={removeElement}>List-toolbox</button></div>
+        </div>
+        </div>
 
-       <div className="d-flex h-100" >
-       <div className="d-flex justify-content-center border w-75 border-info" >
+       <div className=" d-flex h-100 w-100 " >
+       <div className="d-flex justify-content-center border w-100 border-info" >
         <div className=''>
           hi
        <table  className="table  mt-5  border">
@@ -80,7 +89,21 @@ const Interlock = () => {
 </table>
 </div>
         </div>
-        <div className="border w-50 border-info">there</div>
+        {visible && 
+        <div className="border border-info" style={{width: "30%"}}>
+ 
+
+           <ul className=" toolbox d-flex  m-0 p-0 ">
+            <li className="border  border-info">I/O-List</li>
+            <li className=" border  border-info">Signal-list</li>
+            <li className=" border  border-info">Logic-In-Out</li>
+            <li className=" border  border-info">Parameter</li>
+            <li className=" border  border-info">EM</li>
+            <li className=" border  border-info">Interlock</li>
+           </ul>
+
+          </div>
+}
        </div>
       </div>
 

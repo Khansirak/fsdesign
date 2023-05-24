@@ -49,7 +49,10 @@ const Equipement = () => {
       </div>
 
       <div className=" border w-100 border-info h-100"  >
-        <div className=" text-center d-flex  justify-content-between p-2 font-weight-bold"> Equipement <button type="button"  className="border d-flex m-1 btn border-info" style={{backgroundColor: "#C0C0C0"}} onClick={removeElement}>List-toolbox</button> </div>
+        <div className="d-flex  justify-content-between  "> 
+        <div className="col text-center "><h4 className=" p-2 "> Equipement</h4></div> 
+       <div> <button type="button"  className="border d-flex m-1 btn border-info" style={{backgroundColor: "#C0C0C0"}} onClick={removeElement}>List-toolbox</button></div>
+        </div>
         
        <div className="d-flex h-100" >
        <div className="d-flex justify-content-center border w-100 border-info" >

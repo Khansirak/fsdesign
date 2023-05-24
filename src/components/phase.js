@@ -34,9 +34,8 @@ const Phase = () => {
       </div> 
     <div className=" d-flex menu-body w-100 "  >
     <div className=" menu-body2 d-flex flex-row w-100">
-<div className="d-flex border border-info p-0 w-100">
      
-       <div className="d-flex row w-100" >
+       <div className="border d-flex row w-100 border-info" >
        <div className="d-flex  justify-content-between">
         <div>
             <button type="button"  className="border text-center m-1 btn border-info" style={{backgroundColor: "#C0C0C0"}} onClick={removeElement2}>Management</button>
@@ -73,30 +72,25 @@ const Phase = () => {
         <div className="border  border-info" > 
         jii       
         <div className=" row" >
-        <nav className ="navbar ">
-          <ul className ="nav m-2 d-flex  justify-content-around navbar-nav">
-          <li className ="nav-item w-75 ">
-            <button type="button"  className="border btn btn-rounded m-4  border-info" style={{backgroundColor: "#b7e778"}} /* onClick={() => {setInput([...recip, <recip defaultValue={recip.length + 1} />]);}} */ >Schritt </button>
-          </li>
-          <li className ="nav-item w-75 ">
-            <button type="button"  className="border  btn btn-rounded m-4  border-info" style={{backgroundColor: "#b7e778"}} >Transition</button>
-          </li>
-          <li className ="nav-item w-75">
-            <button type="button" className="border btn btn-rounded m-4  border-info" style={{backgroundColor: "#b7e778"}}>Action</button>
-          </li>
-          <li className ="nav-item w-75">
-            <button type="button"  className="border btn btn-rounded m-4  border-info" style={{backgroundColor: "#b7e778"}}>UP</button>
-          </li>
-          <li className ="nav-item w-75">
-            <button type="button"  className="border btn btn-rounded m-4  border-info" style={{backgroundColor: "#b7e778"}}>Down</button>
-          </li>
+        
+          <ul className ="nav m-2 d-flex wrap justify-content-around navbar-nav">
+
+            {/* <button style={{backgroundColor: "#b7e778"}} ><img className="w-25 h-auto" alt="Action" src={require(`../images/Action.png`)} /></button> */}
+         
+        
+           <img className="w-25 h-auto" alt="Action" src={require(`../images/Ende.png`)} />
+       
+          <img className="w-25 h-auto" alt="Start" src={require(`../images/Start.png`)} />
+         
+          <img className="w-25 h-auto" alt="Transition" src={require(`../images/Transition.png`)} />
+         <img className="w-25 h-auto" alt="Start" src={require(`../images/Parallel.png`)} /> 
           <Link to="/">
           <li className ="nav-item pt-5 mt-5 w-75">
             <button type="button"  className="border btn btn-rounded m-4  border-info" style={{backgroundColor: "#b7e778"}}>Back</button>
           </li>
           </Link>
           </ul>
-          </nav>
+
   
       </div>
         </div>
@@ -158,10 +152,10 @@ const Phase = () => {
              
         </div>
         {visible1 && 
-        <div className="border w-100 border-info" >        
+        <div className="border  border-info" >        
         <text className=" border-bottom d-flex  justify-content-center p-2 border-info "> Run:detail </text>
-
-        <table  className="table  m-1 mb-3  border border-dark" > 
+<div className="p-4">
+        <table  className="table table-bordered p-5 border border-dark" > 
     <thead >
   <tr>
       <th className="p-0">Action:</th>
@@ -181,16 +175,16 @@ const Phase = () => {
   <tbody>
     {[...Array(20)].map(() =>
       <tr className="rows" >
-<td ><input type="text" defaultValue="" className='w-75 no-border'></input></td>
-   <td ><input type="text" defaultValue="" className='w-75 no-border'></input></td>
-   <td ><input type="text" defaultValue="" className='w-75 no-border'></input></td>
-   <td ><input type="text" defaultValue="" className='w-75 no-border'></input></td>
-   <td ><input type="text" defaultValue="" className='w-75 no-border' ></input></td>
+<td ><input type="text" defaultValue="" className='w-100 no-border'></input></td>
+   <td ><input type="text" defaultValue="" className='w-100 no-border'></input></td>
+   <td ><input type="text" defaultValue="" className='w-100 no-border'></input></td>
+   <td ><input type="text" defaultValue="" className='w-100 no-border'></input></td>
+   <td ><input type="text" defaultValue="" className='w-100 no-border' ></input></td>
    </tr>
   )}
   </tbody> 
 </table>
-<table  className="table m-1 border border-dark" > 
+<table  className="table table-bordered m-1 border border-dark" > 
     <thead >
   <tr>
       <th className="p-0">Action:</th>
@@ -219,6 +213,7 @@ const Phase = () => {
   )}
   </tbody> 
 </table>
+</div>
         </div>
        }
 
@@ -246,7 +241,6 @@ const Phase = () => {
       }
    </div>
        </div>
-      </div>
     </div>
    </div>
         </> 
