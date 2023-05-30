@@ -3,13 +3,38 @@ import Project from './project';
 import { Link } from 'react-router-dom';
 import './phase.css';
 import Detail from "../images/detail.png"
+import 'reactflow/dist/style.css';
+import { useCallback } from 'react';
+import ImgNodeChain from './ImgNodeChain.js';
+const nodeTypes = {
+  ImgNodeUpd: ImgNodeChain,
+};
+import ReactFlow, {
+  
+  MiniMap,
+  Controls,
+  useNodesState,
+  useEdgesState,
+  addEdge,
+  StepEdge,
+  StraightEdge,
+  useReactFlow,
+  Panel,
+} from 'reactflow';
+//NEED TO STAY OUTSIDE
+const getNodeId = () => `randomnode_${+new Date()}`;
+const initialNodes = [];
+const initialEdges = [];
 
 
 const Phase = () => {
-  const [visible, setVisible] = useState(true);
+  //fortoolbox
+  const [visible, setVisible] = useState(false);
+
   const [visible1, setVisible1] = useState(true);
   const [visible2, setVisible2] = useState(false);
-  const [visibles2, setVisibles2] = useState(true);
+  //for project
+  const [visibles2, setVisibles2] = useState(false);
   const removeElement = () => {
     setVisible((prev) => !prev);
   };
@@ -23,7 +48,51 @@ const Phase = () => {
   };
   const myRecipe = JSON.parse(localStorage.getItem('recipe'));
 
+  ////FOR STEP CHAIN
+  const [nodes, setNodes,onNodesChange] = useNodesState(initialNodes);
+const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+const [rfInstance, setRfInstance] = useState(null);
+const { setViewport } = useReactFlow();
+const onConnect = useCallback((params) => setEdges((eds) => addEdge(params, eds)), [setEdges]);
+
+/////FOR THE STEP CHAIN DIAGRAM PERSITENCE MEMORY
+const onSave = useCallback(() => {
+  if (rfInstance) {
+    const flow = rfInstance.toObject();
+    localStorage.setItem("chain", JSON.stringify(flow));
+  }
+}, [rfInstance]);
+
+const onRestore = useCallback(() => {
+  const restoreFlow = async () => {
+    const flow = JSON.parse(localStorage.getItem("chain"));
+    console.log(flow)
+    if (flow) {
+      const { x = 0, y = 0, zoom = 1 } = flow.viewport;
+      setNodes(flow.nodes || []);
+      setEdges(flow.edges || []);
+      setViewport({ x, y, zoom });
+    }
+  };
+  restoreFlow();
+}, [setNodes, setViewport]);
+
+const getImg = useCallback((e) => {
   
+  const btnId=e.target.id;
+  console.log(btnId);
+  const node =  {
+   id: getNodeId(), 
+   sourcePosition: 'top',
+    targetPosition: 'bottom',
+    position: { x: 100, y: -200 },
+    type: 'ImgNodeUpd',
+     data: {  image:require(`../images/${btnId}`) },
+  }
+  
+  setNodes([...nodes, node]);
+}, [nodes]);
+
     return(
        <>
       <div className="fixed-top text-center mt-2" style={{paddingLeft:"50em"}} > 
@@ -32,10 +101,10 @@ const Phase = () => {
       <button type="button"  className="border rounded-circle m-2 p-4 btn border-info" style={{backgroundColor: "#b7e778"}} >Abort</button>
       <button type="button"  className="border rounded-circle m-2 p-4 btn border-info" style={{backgroundColor: "#b7e778"}} >Stop</button>
       </div> 
-    <div className=" d-flex menu-body w-100 "  >
-    <div className=" menu-body2 d-flex flex-row w-100">
+    <div className=" d-flex menu-body w-100   "  >
+    <div className=" menu-body2 d-flex flex-row  h-75 w-100">
      
-       <div className="border d-flex row w-100 border-info" >
+       <div className="border d-flex row w-100  border-info" >
        <div className="d-flex  justify-content-between">
         <div>
             <button type="button"  className="border text-center m-1 btn border-info" style={{backgroundColor: "#C0C0C0"}} onClick={removeElement2}>Management</button>
@@ -65,34 +134,25 @@ const Phase = () => {
       <div className=" border d-flex p-0 m-0 border-info">
       {visibles2&& 
 
-<div className=" m-0" style={{width:"20%"}}>
+<div className=" m-0" style={{width:"18%"}}>
 <Project />
 </div>
 } 
-        <div className="border  border-info" > 
+        <div className="border border-info " style={{width:"18%"}} > 
         jii       
-        <div className=" row" >
-        
-          <ul className ="nav m-2 d-flex wrap justify-content-around navbar-nav">
+        <div className=" d-flex mt-5 row justify-content-between p-4 h-75" >
 
-            {/* <button style={{backgroundColor: "#b7e778"}} ><img className="w-25 h-auto" alt="Action" src={require(`../images/Action.png`)} /></button> */}
-         
-        
-           <img className="w-25 h-auto" alt="Action" src={require(`../images/Ende.png`)} />
-       
-          <img className="w-25 h-auto" alt="Start" src={require(`../images/Start.png`)} />
-         
-          <img className="w-25 h-auto" alt="Transition" src={require(`../images/Transition.png`)} />
-         <img className="w-25 h-auto" alt="Start" src={require(`../images/Parallel.png`)} /> 
-          <Link to="/">
-          <li className ="nav-item pt-5 mt-5 w-75">
-            <button type="button"  className="border btn btn-rounded m-4  border-info" style={{backgroundColor: "#b7e778"}}>Back</button>
-          </li>
-          </Link>
-          </ul>
+            <div><button className="logic-btn border-0 p-0 m-0 w-100"  onClick={getImg }  ><img className="logic-button" id="Action.png" src={require(`../images/Action.png`)} style={{backgroundColor: "white"}} /></button></div>
 
-  
+          <div><button className="logic-btn border-0 p-0 w-100"  onClick={getImg }  ><img className="logic-button" id="Ende.png" src={require(`../images/Ende.png`)} style={{backgroundColor: "white"}} /></button></div>
+          <div><button className="logic-btn border-0 p-0 w-100"  onClick={getImg } ><img className="logic-button" id="Start.png" alt="Start" src={require(`../images/Start.png`)} style={{backgroundColor: "white"}} /></button></div>
+         
+         <div><button className="logic-btn border-0 p-0 w-100"  onClick={getImg }  > <img className="logic-button" id="Transition.png" alt="Transition" src={require(`../images/Transition.png`)}  style={{backgroundColor: "white"}}/></button></div>
+         <div><button className="logic-btn border-0 p-0 w-100"  onClick={getImg }  ><img className="logic-button" id="Parallel.png" alt="Parallel" src={require(`../images/Parallel.png`)}  style={{backgroundColor: "white"}}/></button> </div>
       </div>
+      <Link to="/">
+           <div className="mt-auto text-center "> <button type="button"  className="border btn btn-rounded p-4  border-info" style={{backgroundColor: "#b7e778"}}>Back</button></div>
+          </Link>
         </div>
 
         <div className="border w-100 border-info" >        
@@ -105,8 +165,43 @@ const Phase = () => {
             <button className="p-0 no-border" style={{width:"3em", height:"3em"}}> <img alt="detail" className="image" src={Detail} style={{width:"100%", height:"100%"}} onClick={get_detail}/> </button>
             <text> Rev-01.00</text>
              </section>
+             
              <div className="d-flex column justify-content-around"> 
-             <div className="d-flex w-50"> STEP CHAIN</div>
+
+             <div className="d-flex w-100 "> 
+             <section className="d-flex h-100 w-100 justify-content-between"> 
+            <div className="border w-100">
+            <div  style={{display: 'flex', justifyContent: 'space-evenly', width: '100%', height:"100hv"}}>
+            <div className=" w-100 " style={{ height: '90vh', width:"90em" }}>
+              <ReactFlow
+                  nodes={nodes}
+                  edges={edges}
+                  onNodesChange={onNodesChange}
+                  onEdgesChange={onEdgesChange}
+                  onConnect={onConnect}
+                  onInit={setRfInstance}
+                  nodeTypes={nodeTypes}
+                  fitView
+                  attributionPosition="bottom-left"
+                  edgeTypes={{ default: StraightEdge }}
+
+                 >
+              <MiniMap />
+              <Controls />
+
+              <Panel position="bottom-right">
+                <button onClick={onSave}>save</button>
+                <button onClick={onRestore}>restore</button>
+              </Panel>
+                
+              </ReactFlow>
+    </div>
+        </div>
+            </div>
+             </section>
+             </div>
+
+
              {visible2 &&
              <div className="border  d-flex row justify-content-between border-info m-2 w-50 h-25">
               <h5 className="border border-info text-center" style={{backgroundColor: "#b7e778"}}> All steps </h5>

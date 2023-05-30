@@ -31,16 +31,14 @@ const Description = () => {
 
 
       <div className=" border w-100 border-info h-100"  >
-      <div className=" d-flex justify-content-between text-center p-2 font-weight-bold"> 
-        
-        <text>Introduction</text>
-
-        <button type="button"  className="border m-1 btn border-info" style={{backgroundColor: "#C0C0C0"}} onClick={removeElement}>List-toolbox</button>
-        
-        </div>
+      <div className=' d-flex row justify-content-between m-1'>
+       <div className="col text-center "><h4 className=" p-2 font-weight-bold"> Introduction</h4></div>
+       <div className="col text-end" ><button type="button"  className="border right m-1 btn border-info" style={{backgroundColor: "#C0C0C0"}} onClick={removeElement}>List-toolbox</button></div>
+     
+       </div>
 
        <div className="d-flex h-100" >
-       <div className="d-flex justify-content-center border w-75 border-info" >
+       <div className="d-flex justify-content-center border w-100 border-info" >
         <div className='d-flex justify-content-center w-100 m-2'>
         <form classname=" row d-flex justify-content-center w-100"  onSubmit={handleSubmit}>
         <label className='  w-100'>

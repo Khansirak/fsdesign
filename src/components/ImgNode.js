@@ -3,7 +3,7 @@ import { Handle } from 'reactflow';
 
 function ImgNode({ data, isConnectable }) {  
   return (
-    <div style={{width:"150px"}}>
+    <div style={{width:"100px"}}>
 
       <Handle type="target" position="left" id="16" style={{   bottom: "0%", backgroundColor:"black", left:"0.5%" }} isConnectable={isConnectable} />
       <Handle type="target" position="left" id="0" style={{  top: "20%", backgroundColor:"rgba(0, 0, 0, 0)",opacity: "0", left:"0.5%" }} isConnectable={isConnectable} />

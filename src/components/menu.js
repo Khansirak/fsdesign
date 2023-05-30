@@ -18,7 +18,7 @@ const removeElement = () => {
         <nav className =" p-0 pt-5">
           <ul className ="nav ml-2 d-flex justify-content-around navbar-nav">
           <li className ="nav-item w-75 ">
-            <button type="button"  className="border btn m-3 border-info" style={{backgroundColor: "#b7e778"}} /* onClick={() => {setInput([...recip, <recip defaultValue={recip.length + 1} />]);}} */ >New Project</button>
+            <button type="button"  className="border btn m-3 border-info" style={{backgroundColor: "#b7e778"}}  >New Project</button>
           </li>
           <li className ="nav-item w-75">
             <button type="button"  className="border  btn m-3 border-info" style={{backgroundColor: "#b7e778"}} >New recipe</button>
@@ -39,7 +39,7 @@ const removeElement = () => {
 
       <div className="border w-100  border-info"  >
      
-        <div className=' d-flex row m-1'>
+        <div className=' d-flex row justify-content-between m-1'>
        <div className="col text-center "><h4 className=" p-2 font-weight-bold"> Management</h4></div>
        <div className="col text-end" ><button type="button"  className="border right m-1 btn border-info" style={{backgroundColor: "#C0C0C0"}} onClick={removeElement}>List-toolbox</button></div>
      

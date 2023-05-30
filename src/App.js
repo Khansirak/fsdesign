@@ -13,6 +13,7 @@ import Logic from './components/logic';
 import Library from './components/library';
 import Graph from './components/graph';
 import  SaveRestore from './components/flow';
+import  PDFPreview from './components/pdf';
 const App = () => (
   <>
 
@@ -29,8 +30,7 @@ const App = () => (
       <Route exact path="/logic" element={<Logic />} />
       <Route exact path="/library" element={<Library />} />
       <Route exact path="/graph" element={<Graph />} />
-      
-      <Route exact path="/user" element={<SaveRestore />} />
+      <Route exact path="/user" element={<PDFPreview />} />
       
     </Routes>
 
